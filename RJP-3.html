@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>RJ Partners — Kancelaria Prawna</title>
+  <meta name="description" content="Kancelaria prawna dla biznesu. Prawo spółek, M&A, kontrakty, spory, compliance. Warszawa / Polska / UE." />
+
+
+<style>
+  :root{
+    --bg:#0a1422;
+    --bg2:#0b1a2e;
+
+    --surface: rgba(255,255,255,.06); /* bardziej “kancelaryjnie” niż szkło */
+    --card:rgba(255,255,255,.06);
+    --card2:rgba(255,255,255,.08);
+    --line:rgba(255,255,255,.14);
+
+    --text:rgba(255,255,255,.92);
+    --muted:rgba(255,255,255,.72);
+    --muted2:rgba(255,255,255,.60);
+
+    --primary:#0D3E62;     /* <<< kolor wiodący */
+    --primary2:#0a2f4a;    /* ciemniejszy odcień dla hover */
+    --link:#2b78b8;        /* spokojny link (bez “neonu”) */
+
+    --accent:#c9a86a;      /* zostawiam jako ultra-subtelny premium akcent (opcjonalnie) */
+    --accent2:#8ab4ff;
+
+    --ok:#7ee07a;
+    --warn:#ffd07a;
+
+    --shadow: 0 16px 42px rgba(0,0,0,.34);
+    --radius: 18px;
+    --radius2: 24px;
+    --max: 1160px;
+    --pad: 22px;
+    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  }
+
+  /* Light mode (system) */
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f6f8fb;
+      --bg2:#ffffff;
+
+      --surface: rgba(13,62,98,.05);
+      --card:rgba(13,62,98,.05);
+      --card2:rgba(13,62,98,.07);
+      --line:rgba(13,62,98,.14);
+
+      --text:rgba(10,20,34,.93);
+      --muted:rgba(10,20,34,.72);
+      --muted2:rgba(10,20,34,.58);
+
+      --shadow: 0 18px 44px rgba(13,62,98,.12);
+    }
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:var(--font);
+
+    /* bardziej “architektoniczne” / consulting — mniej “AI/space” */
+    background:
+      radial-gradient(900px 520px at 12% 0%, rgba(13,62,98,.18), transparent 60%),
+      radial-gradient(800px 520px at 90% 10%, rgba(201,168,106,.10), transparent 60%),
+      linear-gradient(180deg, var(--bg), var(--bg2));
+
+        color:var(--text);
+        line-height:1.55;
+  }
+
+  a{color: color-mix(in oklab, var(--link) 72%, var(--text));}
+  a:hover{color: color-mix(in oklab, var(--link) 92%, var(--text));}
+
+  .container{max-width:var(--max); margin:0 auto; padding:0 18px;}
+  .skip{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
+  .skip:focus{left: 18px; top: 12px; width:auto; height:auto; padding:10px 12px; background:var(--bg2); border:1px solid var(--line); border-radius:12px; z-index:9999}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:1000;
+    backdrop-filter: blur(10px);
+    background: color-mix(in oklab, var(--bg2) 82%, transparent);
+    border-bottom:1px solid var(--line);
+    box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  }
+  .topbar{
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px; text-decoration:none;
+  }
+  .logo{
+    width:40px; height:40px; border-radius:12px;
+    background: linear-gradient(135deg, rgba(13,62,98,.95), rgba(10,47,74,.95));
+    border:1px solid color-mix(in oklab, var(--primary) 45%, var(--line));
+    box-shadow: 0 12px 26px rgba(13,62,98,.22);
+  }
+  .brand strong{font-size:14px; letter-spacing:.3px}
+  .brand span{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
+
+  nav{display:flex; align-items:center; gap:6px}
+  .navlinks{display:flex; align-items:center; gap:6px}
+  .navlinks a{
+    text-decoration:none; font-size:13px; color:var(--muted);
+    padding:10px 10px; border-radius:12px;
+    position: relative;
+  }
+  .navlinks a:hover{background:var(--card); color:var(--text)}
+
+  /* nowoczesny aktywny link: kreska zamiast “pełnej pigułki” */
+  .navlinks a.active{
+    background: transparent;
+    border:1px solid transparent;
+    color:var(--text);
+  }
+  .navlinks a.active::after{
+    content:"";
+    position:absolute; left:10px; right:10px; bottom:6px;
+    height:2px; border-radius:2px;
+    background: color-mix(in oklab, var(--primary) 78%, var(--accent) 16%);
+  }
+
+  .actions{display:flex; align-items:center; gap:10px}
+  .lang{
+    display:flex; gap:6px; padding:6px; border:1px solid var(--line);
+    border-radius:14px; background:var(--card);
+  }
+  .lang button{
+    border:0; background:transparent; color:var(--muted);
+    font-size:12px; padding:8px 10px; border-radius:12px; cursor:pointer;
+  }
+  .lang button[aria-pressed="true"]{
+    background: color-mix(in oklab, var(--primary) 16%, transparent);
+    color:var(--text);
+    border:1px solid color-mix(in oklab, var(--primary) 28%, var(--line));
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:10px 14px; border-radius:14px; border:1px solid var(--line);
+    background: color-mix(in oklab, var(--card) 82%, transparent);
+    color:var(--text); text-decoration:none;
+    font-size:13px; cursor:pointer;
+  }
+  .btn.primary{
+    background: linear-gradient(180deg,
+      color-mix(in oklab, var(--primary) 68%, transparent),
+      color-mix(in oklab, var(--primary2) 55%, transparent)
+    );
+    border-color: color-mix(in oklab, var(--primary) 55%, var(--line));
+  }
+  .btn:hover{filter:brightness(1.06)}
+
+  .iconbtn{
+    width:42px; height:42px; border-radius:14px; display:none;
+    border:1px solid var(--line);
+    background: color-mix(in oklab, var(--card) 82%, transparent);
+    color:var(--text);
+    align-items:center; justify-content:center; cursor:pointer;
+  }
+
+  /* Mobile drawer */
+  .backdrop{position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1200}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(380px, 92vw);
+    background: color-mix(in oklab, var(--bg2) 92%, transparent);
+    border-left:1px solid var(--line);
+    transform: translateX(110%);
+    transition: transform .22s ease;
+    z-index:1300;
+    box-shadow: var(--shadow);
+    padding:16px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .drawer.open{transform: translateX(0)}
+  .drawerhead{display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .drawer .navlinks{display:flex; flex-direction:column; align-items:stretch; gap:6px}
+  .drawer .navlinks a{padding:12px 12px; font-size:14px}
+  .hr{height:1px; background:var(--line); margin:6px 0}
+
+  /* Hero */
+  .hero{padding: 42px 0 18px}
+  .grid2{display:grid; grid-template-columns: 1.25fr .75fr; gap:22px; align-items:stretch}
+
+  .card{
+    background: color-mix(in oklab, var(--surface) 58%, transparent);
+    border:1px solid var(--line);
+    border-radius: var(--radius2);
+    box-shadow: var(--shadow);
+  }
+  .heroCard{padding:28px}
+
+  .kicker{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:8px 12px; border-radius:999px; font-size:12px;
+    background: color-mix(in oklab, var(--primary) 20%, transparent);
+    border:1px solid color-mix(in oklab, var(--primary) 34%, var(--line));
+    color: var(--text);
+  }
+  h1{
+    margin:14px 0 10px;
+    font-size: clamp(28px, 3.0vw, 40px);
+    letter-spacing:-.4px; line-height:1.12;
+  }
+  .lead{margin:0; color:var(--muted); font-size:15px; max-width: 56ch}
+  .heroCtas{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+  .heroMeta{display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; color:var(--muted2); font-size:12px}
+
+  .pill{
+    display:inline-flex; gap:8px; align-items:center;
+    padding:8px 10px; border-radius:999px;
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background: color-mix(in oklab, var(--bg2) 10%, transparent);
+  }
+  .dot{width:8px; height:8px; border-radius:999px; background:var(--primary)}
+
+  .aside{padding:18px}
+  .aside h3{margin:4px 0 6px; font-size:14px}
+  .aside p{margin:0; color:var(--muted); font-size:13px}
+  .aside .box{
+    padding:14px; border-radius:16px;
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background: color-mix(in oklab, var(--bg2) 10%, transparent);
+  }
+  .aside .box + .box{margin-top:10px}
+
+  /* Sections */
+  section{padding: 18px 0}
+  .sectionHead{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 10px 0 14px}
+  .sectionHead h2{margin:0; font-size:18px; letter-spacing:-.2px}
+  .sectionHead p{margin:0; color:var(--muted); font-size:13px; max-width: 70ch}
+
+  .cards{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:14px;
+  }
+  .tile{
+    padding:18px;
+    border-radius: var(--radius);
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background: color-mix(in oklab, var(--bg2) 10%, transparent);
+    min-height: 130px;
+  }
+  .tile h3{margin:0 0 8px; font-size:14px}
+  .tile p{margin:0; color:var(--muted); font-size:13px}
+
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 10px; border-radius:999px; font-size:12px;
+    border:1px solid color-mix(in oklab, var(--primary) 28%, var(--line));
+    background: color-mix(in oklab, var(--primary) 16%, transparent);
+    color: color-mix(in oklab, var(--text) 86%, var(--primary));
+    margin-bottom: 10px;
+  }
+  .twoCols{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:14px;
+  }
+
+  /* Team */
+  .teamGrid{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
+  .person{
+    padding:16px; border-radius: var(--radius);
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background: color-mix(in oklab, var(--bg2) 10%, transparent);
+  }
+  .avatar{
+    width:52px; height:52px; border-radius: 18px;
+    border:1px solid color-mix(in oklab, var(--primary) 28%, var(--line));
+    background:
+      radial-gradient(circle at 30% 20%, rgba(13,62,98,.24), transparent 55%),
+      radial-gradient(circle at 60% 70%, rgba(201,168,106,.10), transparent 55%),
+      rgba(255,255,255,.04);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--muted2);
+    font-weight: 700;
+    letter-spacing:.6px;
+  }
+  .person h4{margin:12px 0 2px; font-size:14px}
+  .role{margin:0; color:var(--muted2); font-size:12px}
+  .bio{margin:10px 0 0; color:var(--muted); font-size:13px}
+
+  /* Testimonials / logos */
+  .logos{display:flex; gap:10px; flex-wrap:wrap}
+  .logoChip{
+    padding:10px 12px; border-radius: 999px;
+    border:1px dashed color-mix(in oklab, var(--line) 92%, transparent);
+    color:var(--muted2);
+    font-size:12px;
+    background: color-mix(in oklab, var(--bg2) 8%, transparent);
+  }
+
+  /* Contact */
+  .contactGrid{display:grid; grid-template-columns: 1.1fr .9fr; gap:14px}
+  form{display:grid; gap:10px}
+  label{font-size:12px; color:var(--muted2)}
+  input, textarea{
+    width:100%;
+    padding:12px 12px;
+    border-radius: 14px;
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background: color-mix(in oklab, var(--bg2) 8%, transparent);
+    color:var(--text);
+    outline:none;
+    font: inherit;
+    font-size: 14px;
+  }
+  textarea{min-height: 120px; resize: vertical}
+  input:focus, textarea:focus{
+    border-color: color-mix(in oklab, var(--primary) 55%, var(--line));
+  }
+  .fineprint{color:var(--muted2); font-size:12px; margin:0}
+  .contactBox{padding:18px}
+  .kv{display:grid; gap:8px; margin-top:8px}
+  .kv div{display:flex; gap:10px; align-items:flex-start; color:var(--muted)}
+  .kv strong{min-width: 86px; color:var(--muted2); font-size:12px}
+  .mapPh{
+    margin-top:12px;
+    height:160px;
+    border-radius: var(--radius);
+    border:1px solid color-mix(in oklab, var(--line) 92%, transparent);
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.04), rgba(255,255,255,.04) 10px, transparent 10px, transparent 20px);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted2); font-size:12px;
+  }
+
+  footer{padding:28px 0 40px; color:var(--muted2); font-size:12px}
+  footer .foot{display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:14px}
+  footer a{color:var(--muted2); text-decoration:none}
+  footer a:hover{color:var(--text)}
+
+  /* Responsive */
+  @media (max-width: 980px){
+    .grid2{grid-template-columns: 1fr; }
+    .cards{grid-template-columns: 1fr 1fr}
+    .teamGrid{grid-template-columns: 1fr 1fr}
+    .contactGrid{grid-template-columns: 1fr}
+  }
+  @media (max-width: 720px){
+    .navlinks{display:none}
+    .iconbtn{display:inline-flex}
+    .cards{grid-template-columns: 1fr}
+    .twoCols{grid-template-columns: 1fr}
+    .teamGrid{grid-template-columns: 1fr}
+    .heroCard{padding:22px}
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{scroll-behavior:auto !important; transition:none !important; animation:none !important}
+  }
+
+  <!-- ZMIANY -->
+
+<!-- TŁO SEKCJE -->
+section{
+  padding: 26px 0; /* trochę więcej powietrza */
+}
+
+section:nth-child(even){
+  background: color-mix(in oklab, var(--bg2) 50%, transparent);
+}
+
+section:nth-child(odd){
+  background: transparent;
+}
+
+/* ZMIANY — TŁO SEKCJI (bez psucia CSS) */
+section{
+  padding: 26px 0;      /* więcej powietrza */
+  background: transparent;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<header>
+  <div class="container">
+    <div class="topbar">
+      <a class="brand" href="#top" aria-label="RJ Partners">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>RJ Partners</strong>
+          <span data-i18n="brand.subtitle">Kancelaria prawna dla biznesu</span>
+        </div>
+      </a>
+
+      <nav aria-label="Nawigacja główna">
+        <div class="navlinks" id="navLinks">
+          <a href="#uslugi" data-i18n="nav.services">Usługi</a>
+          <a href="#specjalizacje" data-i18n="nav.expertise">Specjalizacje</a>
+          <a href="#proces" data-i18n="nav.process">Proces</a>
+          <a href="#zespol" data-i18n="nav.team">Zespół</a>
+          <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="actions">
+        <div class="lang" role="group" aria-label="Wybór języka">
+          <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        </div>
+            <a class="btn primary" href="#kontakt" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 11h10M7 15h6M8 3h8l3 3v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span data-i18n="cta.consult">Umów konsultację</span>
+            </a>
+
+        <button class="iconbtn" id="openMenu" type="button" aria-label="Otwórz menu" title="Menu">
+          
+          
+            <!-- hamburger -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="backdrop" id="menuBackdrop" hidden></div>
+<aside class="drawer" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu mobilne">
+  <div class="drawerhead">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="logo" aria-hidden="true" style="width:36px;height:36px;border-radius:14px"></div>
+      <div>
+        <strong>RJ Partners</strong>
+        <div style="font-size:12px;color:var(--muted2)" data-i18n="brand.subtitle">Kancelaria prawna dla biznesu</div>
+      </div>
+    </div>
+    <button class="iconbtn" id="closeMenu" type="button" aria-label="Zamknij menu" style="display:inline-flex">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="navlinks">
+    <a href="#uslugi" data-i18n="nav.services">Usługi</a>
+    <a href="#specjalizacje" data-i18n="nav.expertise">Specjalizacje</a>
+    <a href="#proces" data-i18n="nav.process">Proces</a>
+    <a href="#zespol" data-i18n="nav.team">Zespół</a>
+    <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+  </div>
+
+  <div class="hr"></div>
+
+  <a class="btn primary" href="#kontakt" data-i18n="cta.consult" style="width:100%">Umów konsultację</a>
+  <a class="btn" href="mailto:kontakt@rjpartners.pl" style="width:100%">kontakt@rjpartners.pl</a>
+
+  <p class="fineprint" data-i18n="drawer.note" style="margin-top:auto">
+    Minimalistyczny UX, szybka nawigacja, treści gotowe do podmiany.
+  </p>
+</aside>
+
+<main id="main">
+
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="container">
+      <div class="grid2">
+        <div class="card heroCard">
+          <div class="kicker" data-i18n="hero.kicker">Polska | UE</div>
+              <h1 data-i18n="hero.title">Wieloletnia praktyka w transakcjach krajowych i międzynarodowych.</h1>
+          <p class="lead" data-i18n="hero.lead">
+            Doradzamy zarządom i zespołom operacyjnym: kontrakty, spory, prawo spółek, compliance. Szybko, konkretnie i z pełną poufnością.
+          </p>
+
+          <div class="heroCtas">
+            <a class="btn primary" href="#kontakt" data-i18n="hero.cta1">Skontaktuj się!</a>
+            <a class="btn" href="#specjalizacje" data-i18n="hero.cta2">Zobacz specjalizacje</a>
+          </div>
+
+  
+          <div class="heroMeta" aria-label="Atuty">
+            <span class="pill"><span class="dot"></span><span data-i18n="hero.meta1">Przyjazny język + twarde podstawy prawne</span></span>
+            <span class="pill"><span class="dot"></span><span data-i18n="hero.meta2">Zorientowanie na ryzyko i terminy</span></span>
+            <span class="pill"><span class="dot"></span><span data-i18n="hero.meta3">Doświadczenie w transakcjach i sporach</span></span>
+          </div>
+        </div>
+
+        <aside class="card aside" aria-label="Szybki skrót">
+          <div class="box">
+            <h3 data-i18n="aside.box1.title">Rozmowa wstępna (15–30 min)</h3>
+            <p data-i18n="aside.box1.text">Krótko rozpoznajemy kontekst i pilność tematu. Otrzymujesz plan działań i priorytety.</p>
+          </div>
+          <div class="box">
+            <h3 data-i18n="aside.box2.title">Tryb współpracy</h3>
+            <p data-i18n="aside.box2.text">Projektowo lub stała obsługa. Jasny zakres, SLA i komunikacja.</p>
+          </div>
+          <div class="box">
+            <h3 data-i18n="aside.box3.title">Poufność i bezpieczeństwo</h3>
+            <p data-i18n="aside.box3.text">Standardy kancelaryjne, kontrola dostępu do dokumentów, bezpieczna wymiana plików.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="uslugi">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2 data-i18n="services.title">Usługi</h2>
+          <p data-i18n="services.desc">Zakres dopasowany do firm: od szybkiej opinii po prowadzenie złożonych projektów.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="tile">
+          <div class="badge" data-i18n="services.s1.badge">Dla zarządów</div>
+          <h3 data-i18n="services.s1.title">Prawo spółek i ład korporacyjny</h3>
+          <p data-i18n="services.s1.text">Uchwały, zmiany w KRS, relacje wspólników, dokumentacja i odpowiedzialność.</p>
+        </div>
+        <div class="tile">
+          <div class="badge" data-i18n="services.s2.badge">Transakcje</div>
+          <h3 data-i18n="services.s2.title">M&A / Due diligence</h3>
+          <p data-i18n="services.s2.text">Analiza ryzyk, wsparcie negocjacji, SPA/APA, struktury i wdrożenie ustaleń.</p>
+        </div>
+        <div class="tile">
+          <div class="badge" data-i18n="services.s3.badge">Operacje</div>
+          <h3 data-i18n="services.s3.title">Kontrakty i negocjacje</h3>
+          <p data-i18n="services.s3.text">Umowy handlowe, IT/SaaS, NDA, regulaminy, zabezpieczenia, odpowiedzialność.</p>
+        </div>
+        <div class="tile">
+          <div class="badge" data-i18n="services.s4.badge">Spory</div>
+          <h3 data-i18n="services.s4.title">Postępowania i pre‑litigation</h3>
+          <p data-i18n="services.s4.text">Strategia procesowa, zabezpieczenia roszczeń, ugody, reprezentacja.</p>
+        </div>
+        <div class="tile">
+          <div class="badge" data-i18n="services.s5.badge">Ryzyko</div>
+          <h3 data-i18n="services.s5.title">Compliance i procedury</h3>
+          <p data-i18n="services.s5.text">Polityki, audyty, szkolenia, AML/RODO (jeśli dotyczy), standardy wewnętrzne.</p>
+        </div>
+        <div class="tile">
+          <div class="badge" data-i18n="services.s6.badge">Stała obsługa</div>
+          <h3 data-i18n="services.s6.title">Abonament / obsługa bieżąca</h3>
+          <p data-i18n="services.s6.text">Stała dostępność, priorytetyzacja tematów, przewidywalność kosztów.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="specjalizacje">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2 data-i18n="expertise.title">Specjalizacje</h2>
+          <p data-i18n="expertise.desc">Wybór obszarów, które najczęściej obsługujemy dla klientów biznesowych.</p>
+        </div>
+      </div>
+
+      <div class="twoCols">
+        <div class="tile">
+          <h3 data-i18n="expertise.c1.title">Ryzyka kontraktowe</h3>
+          <p data-i18n="expertise.c1.text">Klauzule odpowiedzialności, kary umowne, limity, gwarancje, prawa IP, poufność.</p>
+          <div class="logos" style="margin-top:12px">
+            <span class="logoChip">NDA</span>
+            <span class="logoChip">SaaS</span>
+            <span class="logoChip">IP</span>
+            <span class="logoChip" data-i18n="expertise.tag1">Dostawy</span>
+          </div>
+        </div>
+
+        <div class="tile">
+          <h3 data-i18n="expertise.c2.title">Spory i negocjacje</h3>
+          <p data-i18n="expertise.c2.text">Ocena szans, scenariusze ugód, przygotowanie dowodów, działania zabezpieczające.</p>
+          <div class="logos" style="margin-top:12px">
+            <span class="logoChip" data-i18n="expertise.tag2">Pre‑litigation</span>
+            <span class="logoChip" data-i18n="expertise.tag3">Mediacja</span>
+            <span class="logoChip" data-i18n="expertise.tag4">Arbitraż</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards" style="margin-top:14px">
+        <div class="tile">
+          <h3 data-i18n="expertise.s1.title">Prawo spółek</h3>
+          <p data-i18n="expertise.s1.text">Zmiany kapitałowe, umowy wspólników, organy spółek, odpowiedzialność.</p>
+        </div>
+        <div class="tile">
+          <h3 data-i18n="expertise.s2.title">Transakcje i inwestycje</h3>
+          <p data-i18n="expertise.s2.text">DD, dokumentacja transakcyjna, warunki zawieszające, integracja po transakcji.</p>
+        </div>
+        <div class="tile">
+          <h3 data-i18n="expertise.s3.title">Regulacje i compliance</h3>
+          <p data-i18n="expertise.s3.text">Wewnętrzne procedury, analiza zgodności, szkolenia, obsługa incydentów.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="proces">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2 data-i18n="process.title">Jak pracujemy</h2>
+          <p data-i18n="process.desc">Prosty proces, który daje przewidywalność: zakres, terminy, ryzyka, decyzje.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="tile">
+          <div class="badge">01</div>
+          <h3 data-i18n="process.p1.title">Rozpoznanie</h3>
+          <p data-i18n="process.p1.text">Cel, kontekst, dokumenty, ograniczenia czasowe. Ustalamy priorytety i tryb.</p>
+        </div>
+        <div class="tile">
+          <div class="badge">02</div>
+          <h3 data-i18n="process.p2.title">Opcje i ryzyka</h3>
+          <p data-i18n="process.p2.text">Dostajesz warianty + rekomendację: co zyskujemy, co ryzykujemy, co trzeba dopiąć.</p>
+        </div>
+        <div class="tile">
+          <div class="badge">03</div>
+          <h3 data-i18n="process.p3.title">Wdrożenie</h3>
+          <p data-i18n="process.p3.text">Negocjacje, dokumenty, komunikacja z drugą stroną, domknięcie i checklisty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="zespol">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2 data-i18n="team.title">Zespół</h2>
+          <p data-i18n="team.desc">Placeholdery zamiast zdjęć — można później podmienić na realne profile.</p>
+        </div>
+      </div>
+
+      <div class="teamGrid">
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m1.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m1.role">Partner / Prawo spółek</p>
+          <p class="bio" data-i18n="team.m1.bio">Specjalizacja: transakcje, ład korporacyjny, negocjacje. 10+ lat praktyki.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m2.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m2.role">Counsel / Kontrakty</p>
+          <p class="bio" data-i18n="team.m2.bio">Umowy handlowe i IT, odpowiedzialność, IP, zabezpieczenia i wykonanie.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m3.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m3.role">Senior Associate / Spory</p>
+          <p class="bio" data-i18n="team.m3.bio">Strategia procesowa, mediacje, ugody, sprawy gospodarcze i kontraktowe.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m4.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m4.role">Associate / Compliance</p>
+          <p class="bio" data-i18n="team.m4.bio">Procedury, audyty, szkolenia, zarządzanie ryzykiem i wsparcie operacyjne.</p>
+        </article>
+
+                <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m1.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m1.role">Partner / Prawo spółek</p>
+          <p class="bio" data-i18n="team.m1.bio">Specjalizacja: transakcje, ład korporacyjny, negocjacje. 10+ lat praktyki.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m2.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m2.role">Counsel / Kontrakty</p>
+          <p class="bio" data-i18n="team.m2.bio">Umowy handlowe i IT, odpowiedzialność, IP, zabezpieczenia i wykonanie.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m3.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m3.role">Senior Associate / Spory</p>
+          <p class="bio" data-i18n="team.m3.bio">Strategia procesowa, mediacje, ugody, sprawy gospodarcze i kontraktowe.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m4.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m4.role">Associate / Compliance</p>
+          <p class="bio" data-i18n="team.m4.bio">Procedury, audyty, szkolenia, zarządzanie ryzykiem i wsparcie operacyjne.</p>
+        </article>
+
+                <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m1.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m1.role">Partner / Prawo spółek</p>
+          <p class="bio" data-i18n="team.m1.bio">Specjalizacja: transakcje, ład korporacyjny, negocjacje. 10+ lat praktyki.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m2.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m2.role">Counsel / Kontrakty</p>
+          <p class="bio" data-i18n="team.m2.bio">Umowy handlowe i IT, odpowiedzialność, IP, zabezpieczenia i wykonanie.</p>
+        </article>
+
+        <article class="person">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <h4 data-i18n="team.m3.name">Imię Nazwisko</h4>
+          <p class="role" data-i18n="team.m3.role">Senior Associate / Spory</p>
+          <p class="bio" data-i18n="team.m3.bio">Strategia procesowa, mediacje, ugody, sprawy gospodarcze i kontraktowe.</p>
+        </article>
+
+
+
+      </div>
+
+      <div class="card" style="margin-top:14px; padding:18px;">
+        <div class="sectionHead" style="margin:0 0 10px">
+          <h2 style="font-size:14px;margin:0" data-i18n="team.proof.title">Zaufanie i standardy pracy</h2>
+          <p style="margin:0" data-i18n="team.proof.desc">Tu możesz dodać: izby, certyfikaty, publikacje lub typy klientów (bez logo).</p>
+        </div>
+        <div class="logos">
+          <span class="logoChip" data-i18n="team.proof.p1">Poufność</span>
+          <span class="logoChip" data-i18n="team.proof.p2">Szybki feedback</span>
+          <span class="logoChip" data-i18n="team.proof.p3">Jasny zakres</span>
+          <span class="logoChip" data-i18n="team.proof.p4">Przejrzyste ryzyka</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2 data-i18n="contact.title">Kontakt</h2>
+          <p data-i18n="contact.desc">Napisz krótko, czego dotyczy sprawa. Odpowiemy z propozycją dalszych kroków.</p>
+        </div>
+      </div>
+
+      <div class="contactGrid">
+        <div class="card contactBox">
+          <form onsubmit="event.preventDefault(); alert(i18n[currentLang]['contact.form.sent']);">
+            <div>
+              <label for="name" data-i18n="contact.form.name">Imię i nazwisko</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Jan Kowalski" />
+            </div>
+            <div>
+              <label for="email" data-i18n="contact.form.email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="jan@firma.pl" />
+            </div>
+            <div>
+              <label for="topic" data-i18n="contact.form.topic">Temat</label>
+              <input id="topic" name="topic" placeholder="np. umowa, spór, due diligence..." />
+            </div>
+            <div>
+              <label for="msg" data-i18n="contact.form.msg">Wiadomość</label>
+              <textarea id="msg" name="msg" placeholder="Krótki opis kontekstu i terminu..."></textarea>
+            </div>
+
+            <button class="btn primary" type="submit" data-i18n="contact.form.send">Wyślij</button>
+            <p class="fineprint" data-i18n="contact.form.rodo">
+              Klikając „Wyślij” potwierdzasz zapoznanie się z informacją o przetwarzaniu danych.
+            </p>
+          </form>
+        </div>
+
+        <div class="card contactBox" aria-label="Dane kontaktowe">
+          <div class="badge" data-i18n="contact.details.badge">Dane</div>
+          <div class="kv">
+            <div><strong data-i18n="contact.details.emailLabel">E-mail</strong> <span><a href="mailto:kontakt@rjpartners.pl">kontakt@rjpartners.pl</a></span></div>
+            <div><strong data-i18n="contact.details.phoneLabel">Telefon</strong> <span><a href="tel:+48123456789">+48 123 456 789</a></span></div>
+            <div><strong data-i18n="contact.details.cityLabel">Miasto</strong> <span data-i18n="contact.details.city">Warszawa / obsługa PL i UE</span></div>
+          </div>
+
+          <div class="mapPh" data-i18n="contact.details.map">
+            Placeholder mapy / lokalizacji (opcjonalnie)
+          </div>
+
+          <p class="fineprint" style="margin-top:12px" data-i18n="contact.details.note">
+            Wersje EN/FR wbudowane — przełącznik w nagłówku.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <span>© <span id="year"></span> RJ Partners</span>
+      <span>
+        <a href="#top" data-i18n="footer.top">Do góry</a>
+        <span style="opacity:.5"> • </span>
+        <a href="#" data-i18n="footer.privacy">Polityka prywatności</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+
+  // ======= I18N DICTIONARY (PL/EN/FR) =======
+  const i18n = {
+    pl: {
+      "brand.subtitle":"Kancelaria prawna dla biznesu",
+      "nav.services":"Usługi",
+      "nav.expertise":"Specjalizacje",
+      "nav.process":"Proces",
+      "nav.team":"Zespół",
+      "nav.contact":"Kontakt",
+      "cta.consult":"Umów konsultację",
+
+      "drawer.note":"Minimalistyczny UX, szybka nawigacja, treści gotowe do podmiany.",
+
+      "hero.kicker":"Kancelaria • Polska | UE",
+      "hero.title":"Wieloletnia praktyka w transakcjach krajowych i międzynarodowych.",
+      "hero.lead":"Doradzamy zarządom i zespołom operacyjnym: kontrakty, spory, prawo spółek, compliance. Szybko, konkretnie i z pełną poufnością.",
+      "hero.cta1":"Skontaktuj się",
+      "hero.cta2":"Zobacz specjalizacje",
+      "hero.meta1":"Przyjazny język + twarde podstawy prawne",
+      "hero.meta2":"Zorientowanie na ryzyko i terminy",
+      "hero.meta3":"Doświadczenie w transakcjach i sporach",
+
+      "aside.box1.title":"Rozmowa wstępna (15–30 min)",
+      "aside.box1.text":"Krótko rozpoznajemy kontekst i pilność tematu. Otrzymujesz plan działań i priorytety.",
+      "aside.box2.title":"Tryb współpracy",
+      "aside.box2.text":"Projektowo lub stała obsługa. Jasny zakres, SLA i komunikacja.",
+      "aside.box3.title":"Poufność i bezpieczeństwo",
+      "aside.box3.text":"Standardy kancelaryjne, kontrola dostępu do dokumentów, bezpieczna wymiana plików.",
+
+      "services.title":"Usługi",
+      "services.desc":"Zakres dopasowany do firm: od szybkiej opinii po prowadzenie złożonych projektów.",
+      "services.s1.badge":"Dla zarządów",
+      "services.s1.title":"Prawo spółek i ład korporacyjny",
+      "services.s1.text":"Uchwały, zmiany w KRS, relacje wspólników, dokumentacja i odpowiedzialność.",
+      "services.s2.badge":"Transakcje",
+      "services.s2.title":"M&A / Due diligence",
+      "services.s2.text":"Analiza ryzyk, wsparcie negocjacji, SPA/APA, struktury i wdrożenie ustaleń.",
+      "services.s3.badge":"Operacje",
+      "services.s3.title":"Kontrakty i negocjacje",
+      "services.s3.text":"Umowy handlowe, IT/SaaS, NDA, regulaminy, zabezpieczenia, odpowiedzialność.",
+      "services.s4.badge":"Spory",
+      "services.s4.title":"Postępowania i pre‑litigation",
+      "services.s4.text":"Strategia procesowa, zabezpieczenia roszczeń, ugody, reprezentacja.",
+      "services.s5.badge":"Ryzyko",
+      "services.s5.title":"Compliance i procedury",
+      "services.s5.text":"Polityki, audyty, szkolenia, AML/RODO (jeśli dotyczy), standardy wewnętrzne.",
+      "services.s6.badge":"Stała obsługa",
+      "services.s6.title":"Abonament / obsługa bieżąca",
+      "services.s6.text":"Stała dostępność, priorytetyzacja tematów, przewidywalność kosztów.",
+
+      "expertise.title":"Specjalizacje",
+      "expertise.desc":"Wybór obszarów, które najczęściej obsługujemy dla klientów biznesowych.",
+      "expertise.c1.title":"Ryzyka kontraktowe",
+      "expertise.c1.text":"Klauzule odpowiedzialności, kary umowne, limity, gwarancje, prawa IP, poufność.",
+      "expertise.tag1":"Dostawy",
+      "expertise.c2.title":"Spory i negocjacje",
+      "expertise.c2.text":"Ocena szans, scenariusze ugód, przygotowanie dowodów, działania zabezpieczające.",
+      "expertise.tag2":"Pre‑litigation",
+      "expertise.tag3":"Mediacja",
+      "expertise.tag4":"Arbitraż",
+      "expertise.s1.title":"Prawo spółek",
+      "expertise.s1.text":"Zmiany kapitałowe, umowy wspólników, organy spółek, odpowiedzialność.",
+      "expertise.s2.title":"Transakcje i inwestycje",
+      "expertise.s2.text":"DD, dokumentacja transakcyjna, warunki zawieszające, integracja po transakcji.",
+      "expertise.s3.title":"Regulacje i compliance",
+      "expertise.s3.text":"Wewnętrzne procedury, analiza zgodności, szkolenia, obsługa incydentów.",
+
+      "process.title":"Jak pracujemy",
+      "process.desc":"Prosty proces, który daje przewidywalność: zakres, terminy, ryzyka, decyzje.",
+      "process.p1.title":"Rozpoznanie",
+      "process.p1.text":"Cel, kontekst, dokumenty, ograniczenia czasowe. Ustalamy priorytety i tryb.",
+      "process.p2.title":"Opcje i ryzyka",
+      "process.p2.text":"Dostajesz warianty + rekomendację: co zyskujemy, co ryzykujemy, co trzeba dopiąć.",
+      "process.p3.title":"Wdrożenie",
+      "process.p3.text":"Negocjacje, dokumenty, komunikacja z drugą stroną, domknięcie i checklisty.",
+
+      "team.title":"Zespół",
+      "team.desc":"Placeholdery zamiast zdjęć — można później podmienić na realne profile.",
+      "team.m1.name":"Imię Nazwisko",
+      "team.m1.role":"Partner / Prawo spółek",
+      "team.m1.bio":"Specjalizacja: transakcje, ład korporacyjny, negocjacje. 10+ lat praktyki.",
+      "team.m2.name":"Imię Nazwisko",
+      "team.m2.role":"Counsel / Kontrakty",
+      "team.m2.bio":"Umowy handlowe i IT, odpowiedzialność, IP, zabezpieczenia i wykonanie.",
+      "team.m3.name":"Imię Nazwisko",
+      "team.m3.role":"Senior Associate / Spory",
+      "team.m3.bio":"Strategia procesowa, mediacje, ugody, sprawy gospodarcze i kontraktowe.",
+      "team.m4.name":"Imię Nazwisko",
+      "team.m4.role":"Associate / Compliance",
+      "team.m4.bio":"Procedury, audyty, szkolenia, zarządzanie ryzykiem i wsparcie operacyjne.",
+
+      "team.proof.title":"Zaufanie i standardy pracy",
+      "team.proof.desc":"Tu możesz dodać: izby, certyfikaty, publikacje lub typy klientów (bez logo).",
+      "team.proof.p1":"Poufność",
+      "team.proof.p2":"Szybki feedback",
+      "team.proof.p3":"Jasny zakres",
+      "team.proof.p4":"Przejrzyste ryzyka",
+
+      "contact.title":"Kontakt",
+      "contact.desc":"Napisz krótko, czego dotyczy sprawa. Odpowiemy z propozycją dalszych kroków.",
+      "contact.form.name":"Imię i nazwisko",
+      "contact.form.email":"E-mail",
+      "contact.form.topic":"Temat",
+      "contact.form.msg":"Wiadomość",
+      "contact.form.send":"Wyślij",
+      "contact.form.rodo":"Klikając „Wyślij” potwierdzasz zapoznanie się z informacją o przetwarzaniu danych.",
+      "contact.form.sent":"Dziękujemy! To demo — podłącz wysyłkę formularza (np. mail/CRM).",
+
+      "contact.details.badge":"Dane",
+      "contact.details.emailLabel":"E-mail",
+      "contact.details.phoneLabel":"Telefon",
+      "contact.details.cityLabel":"Miasto",
+      "contact.details.city":"Warszawa / obsługa PL i UE",
+      "contact.details.map":"Placeholder mapy / lokalizacji (opcjonalnie)",
+      "contact.details.note":"Wersje EN/FR wbudowane — przełącznik w nagłówku.",
+
+      "footer.top":"Do góry",
+      "footer.privacy":"Polityka prywatności"
+    },
+
+    en: {
+      "brand.subtitle":"Business law firm",
+      "nav.services":"Services",
+      "nav.expertise":"Expertise",
+      "nav.process":"Process",
+      "nav.team":"Team",
+      "nav.contact":"Contact",
+      "cta.consult":"Book a consultation",
+
+      "drawer.note":"Minimal, fast UX. Content is ready to be replaced with final copy.",
+
+      "hero.kicker":"Law firm for companies • Poland / EU",
+      "hero.title":"Legal support for business decisions.",
+      "hero.lead":"We advise management teams and operations: contracts, disputes, corporate law, compliance. Clear, timely and confidential.",
+      "hero.cta1":"Contact us",
+      "hero.cta2":"View expertise",
+      "hero.meta1":"Plain language + solid legal basis",
+      "hero.meta2":"Risk- and deadline-driven approach",
+      "hero.meta3":"Experience in deals and disputes",
+
+      "aside.box1.title":"Intro call (15–30 min)",
+      "aside.box1.text":"We quickly assess context and urgency. You get a plan and priorities.",
+      "aside.box2.title":"Engagement model",
+      "aside.box2.text":"Project-based or ongoing counsel. Clear scope, SLA and communication.",
+      "aside.box3.title":"Confidentiality & security",
+      "aside.box3.text":"Professional standards, controlled access to documents, secure file exchange.",
+
+      "services.title":"Services",
+      "services.desc":"A business-focused scope — from quick opinions to complex projects.",
+      "services.s1.badge":"For management",
+      "services.s1.title":"Corporate law & governance",
+      "services.s1.text":"Resolutions, filings, shareholders relations, documentation and liability.",
+      "services.s2.badge":"Deals",
+      "services.s2.title":"M&A / Due diligence",
+      "services.s2.text":"Risk review, negotiation support, SPA/APA, structure and implementation.",
+      "services.s3.badge":"Operations",
+      "services.s3.title":"Contracts & negotiations",
+      "services.s3.text":"Commercial, IT/SaaS, NDA, policies, safeguards and liability.",
+      "services.s4.badge":"Disputes",
+      "services.s4.title":"Dispute resolution & pre‑litigation",
+      "services.s4.text":"Strategy, injunctions, settlements, representation.",
+      "services.s5.badge":"Risk",
+      "services.s5.title":"Compliance & procedures",
+      "services.s5.text":"Policies, audits, training, incident support and internal standards.",
+      "services.s6.badge":"Ongoing counsel",
+      "services.s6.title":"Retainer / day-to-day support",
+      "services.s6.text":"Availability, prioritization and predictable costs.",
+
+      "expertise.title":"Expertise",
+      "expertise.desc":"Selected areas we most often handle for business clients.",
+      "expertise.c1.title":"Contractual risk",
+      "expertise.c1.text":"Liability clauses, penalties, caps, warranties, IP, confidentiality.",
+      "expertise.tag1":"Supply",
+      "expertise.c2.title":"Disputes & negotiation",
+      "expertise.c2.text":"Chances assessment, settlement scenarios, evidence prep, protective actions.",
+      "expertise.tag2":"Pre‑litigation",
+      "expertise.tag3":"Mediation",
+      "expertise.tag4":"Arbitration",
+      "expertise.s1.title":"Corporate law",
+      "expertise.s1.text":"Capital changes, shareholder agreements, corporate bodies, liability.",
+      "expertise.s2.title":"Transactions & investments",
+      "expertise.s2.text":"DD, transaction docs, conditions precedent, post‑deal integration.",
+      "expertise.s3.title":"Regulatory & compliance",
+      "expertise.s3.text":"Internal procedures, compliance analysis, training, incident response.",
+
+      "process.title":"How we work",
+      "process.desc":"A simple process that adds predictability: scope, timelines, risks and decisions.",
+      "process.p1.title":"Discovery",
+      "process.p1.text":"Goal, context, documents, time constraints. We set priorities and mode.",
+      "process.p2.title":"Options & risks",
+      "process.p2.text":"You get variants + recommendation: upsides, risks and what must be closed.",
+      "process.p3.title":"Execution",
+      "process.p3.text":"Negotiations, documents, communication, closing and checklists.",
+
+      "team.title":"Team",
+      "team.desc":"Placeholders instead of photos — swap later for real profiles.",
+      "team.m1.name":"First Last",
+      "team.m1.role":"Partner / Corporate",
+      "team.m1.bio":"Focus: deals, governance, negotiations. 10+ years of practice.",
+      "team.m2.name":"First Last",
+      "team.m2.role":"Counsel / Contracts",
+      "team.m2.bio":"Commercial and IT contracts, liability, IP, safeguards and delivery.",
+      "team.m3.name":"First Last",
+      "team.m3.role":"Senior Associate / Disputes",
+      "team.m3.bio":"Dispute strategy, mediation, settlements, commercial litigation.",
+      "team.m4.name":"First Last",
+      "team.m4.role":"Associate / Compliance",
+      "team.m4.bio":"Procedures, audits, training, risk management and ops support.",
+
+      "team.proof.title":"Trust & working standards",
+      "team.proof.desc":"Add: bar associations, publications, certifications or client types (without logos).",
+      "team.proof.p1":"Confidentiality",
+      "team.proof.p2":"Fast feedback",
+      "team.proof.p3":"Clear scope",
+      "team.proof.p4":"Transparent risk",
+
+      "contact.title":"Contact",
+      "contact.desc":"Briefly describe the matter. We’ll reply with proposed next steps.",
+      "contact.form.name":"Full name",
+      "contact.form.email":"Email",
+      "contact.form.topic":"Topic",
+      "contact.form.msg":"Message",
+      "contact.form.send":"Send",
+      "contact.form.rodo":"By clicking “Send”, you confirm you have read the data processing notice.",
+      "contact.form.sent":"Thank you! Demo only — connect the form to email/CRM.",
+
+      "contact.details.badge":"Details",
+      "contact.details.emailLabel":"Email",
+      "contact.details.phoneLabel":"Phone",
+      "contact.details.cityLabel":"City",
+      "contact.details.city":"Warsaw / serving PL and EU",
+      "contact.details.map":"Map/location placeholder (optional)",
+      "contact.details.note":"EN/FR versions are built-in — use the header switch.",
+
+      "footer.top":"Back to top",
+      "footer.privacy":"Privacy policy"
+    },
+
+    fr: {
+      "brand.subtitle":"Cabinet d’avocats pour les entreprises",
+      "nav.services":"Services",
+      "nav.expertise":"Expertise",
+      "nav.process":"Processus",
+      "nav.team":"Équipe",
+      "nav.contact":"Contact",
+      "cta.consult":"Prendre rendez-vous",
+
+      "drawer.note":"UX minimal et rapide. Contenu prêt à être finalisé.",
+
+      "hero.kicker":"Cabinet pour les entreprises • Pologne / UE",
+      "hero.title":"Le droit au service des décisions business.",
+      "hero.lead":"Conseil aux dirigeants et aux équipes opérationnelles : contrats, litiges, droit des sociétés, conformité. Clair, réactif et confidentiel.",
+      "hero.cta1":"Nous contacter",
+      "hero.cta2":"Voir l’expertise",
+      "hero.meta1":"Langage clair + base juridique solide",
+      "hero.meta2":"Approche orientée risques et délais",
+      "hero.meta3":"Expérience en transactions et litiges",
+
+      "aside.box1.title":"Appel initial (15–30 min)",
+      "aside.box1.text":"Nous évaluons rapidement le contexte et l’urgence. Vous recevez un plan et des priorités.",
+      "aside.box2.title":"Mode de collaboration",
+      "aside.box2.text":"Mission ponctuelle ou conseil récurrent. Périmètre clair et communication.",
+      "aside.box3.title":"Confidentialité & sécurité",
+      "aside.box3.text":"Standards professionnels, accès contrôlé aux documents, échange sécurisé.",
+
+      "services.title":"Services",
+      "services.desc":"Offre pensée pour les entreprises — de l’avis rapide aux projets complexes.",
+      "services.s1.badge":"Direction",
+      "services.s1.title":"Droit des sociétés & gouvernance",
+      "services.s1.text":"Résolutions, formalités, relations entre associés, documentation et responsabilité.",
+      "services.s2.badge":"Transactions",
+      "services.s2.title":"M&A / Due diligence",
+      "services.s2.text":"Analyse des risques, appui aux négociations, SPA/APA, structure et mise en œuvre.",
+      "services.s3.badge":"Opérations",
+      "services.s3.title":"Contrats & négociations",
+      "services.s3.text":"Contrats commerciaux, IT/SaaS, NDA, politiques, garanties, responsabilité.",
+      "services.s4.badge":"Litiges",
+      "services.s4.title":"Contentieux & pré‑contentieux",
+      "services.s4.text":"Stratégie, mesures conservatoires, transactions, représentation.",
+      "services.s5.badge":"Risque",
+      "services.s5.title":"Conformité & procédures",
+      "services.s5.text":"Politiques internes, audits, formations, gestion d’incidents.",
+      "services.s6.badge":"Conseil récurrent",
+      "services.s6.title":"Abonnement / support au quotidien",
+      "services.s6.text":"Disponibilité, priorisation et coûts prévisibles.",
+
+      "expertise.title":"Expertise",
+      "expertise.desc":"Quelques domaines que nous traitons le plus souvent pour nos clients.",
+      "expertise.c1.title":"Risques contractuels",
+      "expertise.c1.text":"Responsabilité, pénalités, plafonds, garanties, PI, confidentialité.",
+      "expertise.tag1":"Fourniture",
+      "expertise.c2.title":"Litiges & négociation",
+      "expertise.c2.text":"Évaluation des chances, scénarios d’accord, préparation des preuves.",
+      "expertise.tag2":"Pré‑contentieux",
+      "expertise.tag3":"Médiation",
+      "expertise.tag4":"Arbitrage",
+      "expertise.s1.title":"Droit des sociétés",
+      "expertise.s1.text":"Augmentations, pactes d’associés, organes sociaux, responsabilité.",
+      "expertise.s2.title":"Transactions & investissements",
+      "expertise.s2.text":"DD, documentation, conditions suspensives, intégration post‑transaction.",
+      "expertise.s3.title":"Réglementaire & conformité",
+      "expertise.s3.text":"Procédures internes, analyses, formations, gestion d’incidents.",
+
+      "process.title":"Notre méthode",
+      "process.desc":"Un processus simple : périmètre, délais, risques et décisions.",
+      "process.p1.title":"Cadrage",
+      "process.p1.text":"Objectif, contexte, documents, contraintes. Nous fixons les priorités.",
+      "process.p2.title":"Options & risques",
+      "process.p2.text":"Vous recevez des options + une recommandation claire.",
+      "process.p3.title":"Exécution",
+      "process.p3.text":"Négociations, documents, communication, clôture et checklists.",
+
+      "team.title":"Équipe",
+      "team.desc":"Placeholders au lieu de photos — à remplacer par des profils réels.",
+      "team.m1.name":"Prénom Nom",
+      "team.m1.role":"Associé / Sociétés",
+      "team.m1.bio":"Focalisation : transactions, gouvernance, négociations. 10+ ans d’expérience.",
+      "team.m2.name":"Prénom Nom",
+      "team.m2.role":"Counsel / Contrats",
+      "team.m2.bio":"Contrats commerciaux et IT, responsabilité, PI, garanties et exécution.",
+      "team.m3.name":"Prénom Nom",
+      "team.m3.role":"Senior / Litiges",
+      "team.m3.bio":"Stratégie contentieuse, médiation, accords, litiges commerciaux.",
+      "team.m4.name":"Prénom Nom",
+      "team.m4.role":"Collaborateur / Conformité",
+      "team.m4.bio":"Procédures, audits, formations, gestion des risques.",
+
+      "team.proof.title":"Confiance & standards",
+      "team.proof.desc":"Ajoutez : barreau, publications, certifications ou types de clients (sans logos).",
+      "team.proof.p1":"Confidentialité",
+      "team.proof.p2":"Retour rapide",
+      "team.proof.p3":"Périmètre clair",
+      "team.proof.p4":"Risque transparent",
+
+      "contact.title":"Contact",
+      "contact.desc":"Décrivez brièvement la demande. Nous répondrons avec les prochaines étapes.",
+      "contact.form.name":"Nom et prénom",
+      "contact.form.email":"Email",
+      "contact.form.topic":"Sujet",
+      "contact.form.msg":"Message",
+      "contact.form.send":"Envoyer",
+      "contact.form.rodo":"En cliquant sur « Envoyer », vous confirmez avoir lu l’information RGPD.",
+      "contact.form.sent":"Merci ! Démo uniquement — connectez le formulaire (email/CRM).",
+
+      "contact.details.badge":"Coordonnées",
+      "contact.details.emailLabel":"Email",
+      "contact.details.phoneLabel":"Téléphone",
+      "contact.details.cityLabel":"Ville",
+      "contact.details.city":"Varsovie / Pologne & UE",
+      "contact.details.map":"Placeholder de carte/localisation (optionnel)",
+      "contact.details.note":"Versions EN/FR intégrées — utilisez le sélecteur en en-tête.",
+
+      "footer.top":"Haut de page",
+      "footer.privacy":"Politique de confidentialité"
+    }
+  };
+
+  // ======= Language switching =======
+  const langButtons = document.querySelectorAll(".lang button");
+  const translatable = document.querySelectorAll("[data-i18n]");
+  const root = document.documentElement;
+
+  let currentLang = (localStorage.getItem("lang") || "pl");
+  if (!i18n[currentLang]) currentLang = "pl";
+
+  function applyLang(lang){
+    currentLang = lang;
+    localStorage.setItem("lang", lang);
+    root.setAttribute("lang", lang);
+
+    translatable.forEach(el=>{
+      const key = el.getAttribute("data-i18n");
+      const val = i18n[lang][key];
+      if (typeof val === "string") el.textContent = val;
+    });
+
+    langButtons.forEach(b=>{
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+  }
+
+  langButtons.forEach(btn=>{
+    btn.addEventListener("click", ()=> applyLang(btn.dataset.lang));
+  });
+
+  applyLang(currentLang);
+
+  // ======= Active nav highlight =======
+  const links = document.querySelectorAll('a[href^="#"]');
+  const sections = [...document.querySelectorAll("section[id]")];
+
+  function setActive(){
+    const y = window.scrollY + 90;
+    let id = "";
+    for (const s of sections){
+      if (s.offsetTop <= y) id = s.id;
+    }
+    document.querySelectorAll(".navlinks a").forEach(a=>{
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+    });
+  }
+  window.addEventListener("scroll", setActive, {passive:true});
+  setActive();
+
+  // ======= Mobile menu =======
+  const backdrop = document.getElementById("menuBackdrop");
+  const drawer = document.getElementById("mobileMenu");
+  const openBtn = document.getElementById("openMenu");
+  const closeBtn = document.getElementById("closeMenu");
+
+  function openMenu(){
+    backdrop.hidden = false;
+    drawer.classList.add("open");
+    document.body.style.overflow="hidden";
+  }
+  function closeMenu(){
+    drawer.classList.remove("open");
+    document.body.style.overflow="";
+    setTimeout(()=>{ backdrop.hidden = true; }, 160);
+  }
+
+  openBtn?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  backdrop?.addEventListener("click", closeMenu);
+  drawer.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener("click", closeMenu);
+  });
+
+  // ======= Footer year =======
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ======= Smooth scroll (respect reduced motion) =======
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  links.forEach(a=>{
+    a.addEventListener("click", (e)=>{
+      const href = a.getAttribute("href");
+      if(!href || href.length < 2) return;
+      const target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({behavior: prefersReduced ? "auto":"smooth", block:"start"});
+      history.replaceState(null, "", href);
+    });
+  });
+</script>
+</body>
+</html>
